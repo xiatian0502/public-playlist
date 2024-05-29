@@ -6,8 +6,9 @@ $maxResults = 20;
 $API_key = getenv('AIzaSyAONZd3f8TN6QZS39WCeddl7YqP1TdhkkQ'); // 从环境变量获取API_KEY
 
 // 输出API_KEY到命令输出，调试使用
-file_put_contents('command_output.txt', "API_KEY: " . $API_key . "\n", FILE_APPEND);
+file_put_contents('command_output.txt', "API_KEY: " . ($API_key ? '<hidden>' : 'not set') . "\n", FILE_APPEND);
 
+// 检查API_KEY是否存在
 if (!$API_key) {
     file_put_contents('command_output.txt', "Error: API key is missing\n", FILE_APPEND);
     exit("Error: API key is missing\n");
