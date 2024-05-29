@@ -21,7 +21,7 @@ $m3uFilePath = 'youtube.m3u';
 file_put_contents($m3uFilePath, "#EXTM3U" . PHP_EOL);
 
 foreach ($playlistIds as $playlistId) {
-    $api_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=' . $maxResults . '&playlistId=' . $playlistId . '&key=' . $API_key;
+    $api_url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=' . $maxResults . '&playlistId=' . $playlistId . '&key=' . urlencode($API_key);
     
     // 使用播放列表ID获取视频列表
     $videoList = json_decode(file_get_contents($api_url), true);
