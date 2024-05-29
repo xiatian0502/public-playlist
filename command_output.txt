@@ -5,3 +5,5 @@ API URL: https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxRes
 Response: 
 API URL: https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=20&playlistId=PLNXJ_YC1PDA1L6H_ec0pn25QkDdK_8KrB&key=
 Response: 
+API_KEY: 
+Error: API key is missing
