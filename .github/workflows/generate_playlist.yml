@@ -1,39 +1,37 @@
-name: Generate YouTube Playlist
+   name: Generate YouTube Playlist
 
-on:
-  schedule:
-    # 每12小时运行一次
-    - cron: '0 */12 * * *'
-  workflow_dispatch:
+   on:
+     schedule:
+       # 每12小时运行一次
+       - cron: '0 */12 * * *'
+     workflow_dispatch:
 
-jobs:
-  generate-playlist:
-    runs-on: ubuntu-latest
+   jobs:
+     generate-playlist:
+       runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+       steps:
+       - name: Checkout repository
+         uses: actions/checkout@v2
 
-    - name: Set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.0'
+       - name: Set up PHP
+         uses: shivammathur/setup-php@v2
+         with:
+           php-version: '8.0' # 使用的PHP版本
 
-    - name: Install dependencies
-      run: sudo apt-get install -y curl jq ffmpeg
+       - name: Install dependencies
+         run: sudo apt-get install -y curl jq ffmpeg
 
-    - name: Install yt-dlp
-      run: sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp && sudo chmod a+rx /usr/local/bin/yt-dlp
+       - name: Install yt-dlp
+         run: sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp && sudo chmod a+rx /usr/local/bin/yt-dlp
 
-    - name: Generate playlist
-      run: php generate_playlist.php
+       - name: Generate playlist
+         run: php generate_playlist.php
 
-    - name: Commit and push changes
-      env:
-        ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
-      run: |
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "github-actions[bot]"
-        git add youtube.m3u
-        git commit -m "Update youtube.m3u"
-        git push https://xiatian0502:${{ secrets.ACTIONS_PAT }}@github.com/xiatian0502/youtube-playlist-generator.git
+       - name: Upload m3u file and debug output to repository
+         run: |
+           git config --local user.email "github-actions[bot]@users.noreply.github.com"
+           git config --local user.name "github-actions[bot]"
+           git add youtube.m3u yt_dlp_version.txt command_output.txt
+           git commit -m "Update youtube.m3u and debug output"
+           git push
