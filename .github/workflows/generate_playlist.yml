@@ -27,7 +27,7 @@ jobs:
 
     - name: Generate playlist
       env:
-        YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}  # 确保这里的引用正确
       run: php generate_playlist.php
 
     - name: Upload m3u file and debug output to repository
