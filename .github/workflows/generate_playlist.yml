@@ -1,0 +1,37 @@
+name: Generate YouTube Playlist
+
+on:
+  schedule:
+    # 每12小时运行一次
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+jobs:
+  generate-playlist:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0' 
+
+    - name: Install dependencies
+      run: sudo apt-get install -y curl jq ffmpeg
+
+    - name: Install yt-dlp
+      run: sudo curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp && sudo chmod a+rx /usr/local/bin/yt-dlp
+
+    - name: Generate playlist
+      run: php generate_playlist.php
+
+    - name: Upload m3u file to repository
+      run: |
+        git config --local user.email "gxia7466@gmail.com"
+        git config --local user.name "xiatian0502"
+        git add youtube.m3u
+        git commit -m "Update youtube.m3u"
+        git push
