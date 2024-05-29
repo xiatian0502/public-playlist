@@ -1,9 +1,17 @@
 <?php
 
-$playlistIds = ['PLQWMqkNuwweK2NUFEex3Jked5lBWcUIJc&index=6', 'PLNXJ_YC1PDA1L6H_ec0pn25QkDdK_8KrB']; // 直接在脚本中定义播放列表ID
+$playlistIds = ['PLQWMqkNuwweK2NUFEex3Jked5lBWcUIJc&index=6', 'PLNXJ_YC1PDA1L6H_ec0pn25QkDdK_8KrB']; 
 $maxResults = 20;
 
 $API_key = getenv('AIzaSyAONZd3f8TN6QZS39WCeddl7YqP1TdhkkQ'); // 从环境变量获取API_KEY
+
+// 输出API_KEY到命令输出，调试使用
+file_put_contents('command_output.txt', "API_KEY: " . $API_key . "\n", FILE_APPEND);
+
+if (!$API_key) {
+    file_put_contents('command_output.txt', "Error: API key is missing\n", FILE_APPEND);
+    exit("Error: API key is missing\n");
+}
 
 $yt_dlp_path = "/usr/local/bin/yt-dlp";
 $yt_dlp_version = shell_exec("$yt_dlp_path --version");
