@@ -11,3 +11,5 @@ API_KEY:
 Error: API key is missing
 API_KEY: 
 Error: API key is missing
+API_KEY: not set
+Error: API key is missing
