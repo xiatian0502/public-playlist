@@ -3,7 +3,7 @@
 $playlistIds = ['PLQWMqkNuwweK2NUFEex3Jked5lBWcUIJc&index=6', 'PLNXJ_YC1PDA1L6H_ec0pn25QkDdK_8KrB']; // 直接在脚本中定义播放列表ID
 $maxResults = 20;
 
-$API_key = 'YOUR_API_KEY_HERE'; // 你的API_KEY
+$API_key = 'AIzaSyAONZd3f8TN6QZS39WCeddl7YqP1TdhkkQ'; // 你的API_KEY
 
 $m3uFilePath = 'youtube.m3u';
 file_put_contents($m3uFilePath, "#EXTM3U" . PHP_EOL);
